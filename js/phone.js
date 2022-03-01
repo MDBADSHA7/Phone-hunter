@@ -21,6 +21,7 @@ const displaySearchResult = data => {
         <div class="card-body">
         <h5 class="card-title">${data.phone_name}</h5>
         <p class="card-text">${data.slug}</p>
+        <button onclick="searchPhone()" class="bg-danger text-white">Details</button>
         </div>
         </div>
         `;
