@@ -16,7 +16,7 @@ const displaySearchResult = data => {
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
-        <div class="card h-100">
+        <div onclick="loadPhoneDetail('${data.brand}')" class="card h-100">
         <img src="${data.image}" class="card-img-top" alt="...">
         <div class="card-body">
         <h5 class="card-title">${data.phone_name}</h5>
@@ -26,4 +26,10 @@ const displaySearchResult = data => {
         `;
         searchResult.appendChild(div)
     })
+}
+const loadPhoneDetail = brand => {
+    const url = `https://openapi.programming-hero.com/api/phone/apple_iphone_13_pro_max-11089=${brand}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(final => console.log(final.data));
 }
