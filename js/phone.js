@@ -2,18 +2,21 @@ const searchPhone = () => {
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
     // console.log(searchText);
+    // clear previous data.
     searchField.value = '';
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
     // console.log(url);
     fetch(url)
         .then(res => res.json())
         .then(result => displaySearchResult(result.data))
+        // Try to do error handeling.
         .catch(error => console.log(error));
 }
 const displaySearchResult = data => {
     const searchResult = document.getElementById('search-iphone');
     // clear previous data
     searchResult.textContent = '';
+    // make dynamik HTML
     data.forEach(data => {
         console.log(data);
         const div = document.createElement('div');
@@ -38,19 +41,25 @@ const loadPhoneDetail = brand => {
     fetch(url)
         .then(res => res.json())
         .then(final => displayStorage(final.data));
-    // New
+
     const displayStorage = mainFeatures => {
         console.log(mainFeatures);
 
 
         const container = document.getElementById('phone-details');
+
         //  Clear previous detaisl card
+
         container.textContent = '';
         const div = document.createElement('div');
         div.classList.add('card');
+
+        //    Show phone details in details card.
+
         div.innerHTML = `
    <img src="${mainFeatures.image}" class="card-img-top" alt="...">
    <div class="card-body">
+
 
 
 <h5 class="card-title">${mainFeatures.brand}</h5>
