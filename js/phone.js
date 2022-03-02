@@ -28,10 +28,27 @@ const displaySearchResult = data => {
         searchResult.appendChild(div)
     })
 }
+// For see phone details.
 const loadPhoneDetail = brand => {
-    const url = `https://openapi.programming-hero.com/api/phone/${brand}`;
+    const url = `https://openapi.programming-hero.com/api/phone/apple_iphone_13_pro_max-11089${status}`;
     fetch(url)
         .then(res => res.json())
-        .then(final => console.log(final.data));
+        .then(final => displayStorage(final.data.mainFeatures));
 }
 loadPhoneDetail();
+const displayStorage = storage => {
+    console.log(storage);
+}
+// const loadCheapSet = sensors => {
+//     console.log(sensors[0]);
+// }
+// const displayPhoneDetails = storage => {
+//     const container = document.getElementById('phone-details');
+//     storage.forEach(memory => {
+//         const div = document.createElement('div');
+//         div.innerHTML = `
+//         <h1>${storage.mamory}</h1>
+//        `;
+//         container.appendChild(div);
+//     })
+// }
