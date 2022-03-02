@@ -14,8 +14,6 @@ const displaySearchResult = data => {
     const searchResult = document.getElementById('search-iphone');
     // clear previous data
     searchResult.textContent = '';
-
-
     data.forEach(data => {
         console.log(data);
         const div = document.createElement('div');
@@ -39,31 +37,41 @@ const loadPhoneDetail = brand => {
     const url = `https://openapi.programming-hero.com/api/phone/apple_iphone_13_pro_max-11089${status}`;
     fetch(url)
         .then(res => res.json())
-        .then(final => displayStorage(final.data.mainFeatures));
-}
-const displayStorage = storage => {
-    console.log(storage);
-    const container = document.getElementById('phone-details');
-    // Clear previous detaisl card
-    container.textContent = '';
-    const div = document.createElement('div');
-    div.classList.add('card');
-    div.innerHTML = `
-    <img src="" class="card-img-top" alt="...">
-     <div class="card-body">
-          <h5 class="card-title">${storage.displaySize}</h5>
-          <h5 class="card-title">${storage.chipSet}</h5>
-          <h5 class="card-title">${storage.memory}</h5>
-          <h5 class="card-title">${storage.sensors[0]}</h5>
-          <h5 class="card-title">${storage.sensors[1]}</h5>
-          <h5 class="card-title">${storage.sensors[2]}</h5>
-          <h5 class="card-title">${storage.sensors[3]}</h5>
-          <h5 class="card-title">${storage.sensors[4]}</h5>
-          <h5 class="card-title">${storage.sensors[5]}</h5>
-          <h5 class="card-title">${storage.storage}</h5>
-       
-         <a href="https://youtu.be/IDtC-aNU02c" class="btn btn-primary">See hear Phone Details</a>
-       </div>
-  `;
-    container.appendChild(div);
+        .then(final => displayStorage(final.data));
+    // New
+    const displayStorage = mainFeatures => {
+        console.log(mainFeatures);
+
+
+        const container = document.getElementById('phone-details');
+        //  Clear previous detaisl card
+        container.textContent = '';
+        const div = document.createElement('div');
+        div.classList.add('card');
+        div.innerHTML = `
+   <img src="${mainFeatures.image}" class="card-img-top" alt="...">
+   <div class="card-body">
+
+
+<h5 class="card-title">${mainFeatures.brand}</h5>
+<h5 class="card-title">${mainFeatures.mainFeatures.chipSet}</h5>
+<h5 class="card-title">${mainFeatures.mainFeatures.displaySize}</h5>
+<h5 class="card-title">${mainFeatures.mainFeatures.memory}</h5>
+<h5 class="card-title">${mainFeatures.mainFeatures.sensors[0]}</h5>
+<h5 class="card-title">${mainFeatures.mainFeatures.sensors[1]}</h5>
+<h5 class="card-title">${mainFeatures.mainFeatures.sensors[2]}</h5>
+<h5 class="card-title">${mainFeatures.mainFeatures.sensors[3]}</h5>
+<h5 class="card-title">${mainFeatures.mainFeatures.sensors[4]}</h5>
+<h5 class="card-title">${mainFeatures.mainFeatures.storage}</h5>
+<h5 class="card-title">${mainFeatures.others.Bluetooth}</h5>
+<h5 class="card-title">${mainFeatures.others.GPS}</h5>
+<h5 class="card-title">${mainFeatures.others.NFC}</h5>
+<h5 class="card-title">${mainFeatures.others.Radio}</h5>
+<h5 class="card-title">${mainFeatures.others.USB}</h5>
+<h5 class="card-title">${mainFeatures.others.WLAN}</h5>   
+       <a href="https://youtu.be/IDtC-aNU02c" class="btn btn-primary">See hear Phone Details</a>
+     </div>
+   `;
+        container.appendChild(div);
+    }
 }
