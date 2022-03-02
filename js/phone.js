@@ -7,10 +7,15 @@ const searchPhone = () => {
     // console.log(url);
     fetch(url)
         .then(res => res.json())
-        .then(result => displaySearchResult(result.data));
+        .then(result => displaySearchResult(result.data))
+        .catch(error => console.log(error));
 }
 const displaySearchResult = data => {
     const searchResult = document.getElementById('search-iphone');
+    // clear previous data
+    searchResult.textContent = '';
+
+
     data.forEach(data => {
         console.log(data);
         const div = document.createElement('div');
@@ -26,6 +31,7 @@ const displaySearchResult = data => {
         </div>
         `;
         searchResult.appendChild(div)
+
     })
 }
 // For see phone details.
@@ -35,20 +41,29 @@ const loadPhoneDetail = brand => {
         .then(res => res.json())
         .then(final => displayStorage(final.data.mainFeatures));
 }
-loadPhoneDetail();
 const displayStorage = storage => {
     console.log(storage);
+    const container = document.getElementById('phone-details');
+    // Clear previous detaisl card
+    container.textContent = '';
+    const div = document.createElement('div');
+    div.classList.add('card');
+    div.innerHTML = `
+    <img src="" class="card-img-top" alt="...">
+     <div class="card-body">
+          <h5 class="card-title">${storage.displaySize}</h5>
+          <h5 class="card-title">${storage.chipSet}</h5>
+          <h5 class="card-title">${storage.memory}</h5>
+          <h5 class="card-title">${storage.sensors[0]}</h5>
+          <h5 class="card-title">${storage.sensors[1]}</h5>
+          <h5 class="card-title">${storage.sensors[2]}</h5>
+          <h5 class="card-title">${storage.sensors[3]}</h5>
+          <h5 class="card-title">${storage.sensors[4]}</h5>
+          <h5 class="card-title">${storage.sensors[5]}</h5>
+          <h5 class="card-title">${storage.storage}</h5>
+       
+         <a href="https://youtu.be/IDtC-aNU02c" class="btn btn-primary">See hear Phone Details</a>
+       </div>
+  `;
+    container.appendChild(div);
 }
-// const loadCheapSet = sensors => {
-//     console.log(sensors[0]);
-// }
-// const displayPhoneDetails = storage => {
-//     const container = document.getElementById('phone-details');
-//     storage.forEach(memory => {
-//         const div = document.createElement('div');
-//         div.innerHTML = `
-//         <h1>${storage.mamory}</h1>
-//        `;
-//         container.appendChild(div);
-//     })
-// }
